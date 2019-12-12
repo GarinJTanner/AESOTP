@@ -118,11 +118,11 @@ class console(cmd.Cmd):
             print('Cypher: ' + str(h3))
             print()
 
-            message = message + str(h3)
-            print(message)
+        message = message + str(h3)
+        print(message)
             
-            os.system('echo ' + message + '| minimodem --tx 100 -f /root/test.wav')
-            console().cmdloop()
+        os.system('echo ' + message + '| minimodem --tx 100 -f /root/test.wav')
+        console().cmdloop()
 
 
 
@@ -157,7 +157,7 @@ class console(cmd.Cmd):
             print("Invalid input. Must be integer. \n")
             console().cmdloop()
 
-
+        
         rndm = str(random.getrandbits(50000))
         key_list = []
         num = 1
@@ -172,8 +172,11 @@ class console(cmd.Cmd):
             key_list.append(str(num2))
         rndm = "".join(key_list)
 
+        
+        os.system('minimodem --rx 100 -f "/root/test.wav" > test.txt')
 
-        message = dispute_object.evidence["access_activity_log"]
+        message = str(open("test.txt","r"))
+        
         myList = list(character_list)
         random.seed(char_seed)
         random.shuffle(myList)
