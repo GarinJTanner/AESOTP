@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 import ast, base64, cmd, hashlib, os, random, re, stripe
 from Crypto.Cipher import AES
 from datetime import datetime
