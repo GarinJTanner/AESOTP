@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import ast, base64, cmd, hashlib, os, random, re
 from Crypto.Cipher import AES
@@ -10,7 +10,7 @@ for i in range(32, 0x110000):
     izard = chr(i)
     if izard.isprintable():
        character_list = character_list + izard
-    
+
 regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
 
 
@@ -118,9 +118,9 @@ class console(cmd.Cmd):
             print('Cypher: ' + str(h3))
             print()
 
-        message = message + str(h3)
+            message = message + str(h3)
         print(message)
-            
+
         os.system('echo ' + message + '| minimodem --tx 100 -f /root/test.wav')
         console().cmdloop()
 
@@ -157,7 +157,7 @@ class console(cmd.Cmd):
             print("Invalid input. Must be integer. \n")
             console().cmdloop()
 
-        
+
         rndm = str(random.getrandbits(50000))
         key_list = []
         num = 1
@@ -172,11 +172,14 @@ class console(cmd.Cmd):
             key_list.append(str(num2))
         rndm = "".join(key_list)
 
-        
+
         os.system('minimodem --rx 100 -f "/root/test.wav" > test.txt')
 
-        message = str(open("test.txt","r"))
-        
+        message = open("test.txt","r")
+        message = message.read()
+        print(message)
+
+
         myList = list(character_list)
         random.seed(char_seed)
         random.shuffle(myList)
@@ -194,11 +197,10 @@ class console(cmd.Cmd):
                 key = rndm[key_start]
                 keys = keys + key
                 key_start += 1
-            try:
-                msg_out_lst.append(char_list[int(ph) - 100 - int(keys)])
-            except:
-                print("Incorrect password or key length.")
-                console().cmdloop()
+
+            msg_out_lst.append(char_list[int(ph) - 100 - int(keys)])
+
+
 
             message2 = message2 + ph
 
