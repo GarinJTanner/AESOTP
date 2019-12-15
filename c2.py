@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import ast, base64, cmd, hashlib, os, random, re
+##
+# Imports
+##
+
+import ast, base64, cmd, hashlib, os, random, re, sys
 from Crypto.Cipher import AES
 from datetime import datetime
+
+##
+# Define character list and special characters
+##
 
 character_list = ""
 for i in range(32, 0x110000):
@@ -11,12 +19,13 @@ for i in range(32, 0x110000):
     if izard.isprintable():
        character_list = character_list + izard
 
-regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+regex = re.compile('[@_!#$%^&*()<>?/\\|}{~:]')
 
-
+##
+# Define interatice console program https://docs.python.org/3/library/cmd.html
+##
 
 print('\nSUPER SECRET CHAT PROGRAM \n Type help for more info. \n')
-
 
 class console(cmd.Cmd):
     prompt = '<input> '
@@ -24,20 +33,34 @@ class console(cmd.Cmd):
     def do_send(self, arg):
         '''Send a message.'''
         msg_in = input("Message: ")
-        password = input("Password: ")
-        if len(password) <= 8:
-            print("Password must be at least 8 characters.")
-            console().cmdloop()
-
-        if (regex.search(password) == None):
-            print("Password must include special characters.")
-            console().cmdloop()
-
-        try:
-            key_length = int(input("Key length: "))
-        except:
-            print("Key length must be an integer and cannot be blank.")
-            console().cmdloop()
+        invalid = True
+        while invalid:
+            password = input("Password: ")
+            if password == "quit":
+                console.quit_pretext(self)
+                console.onecmd(self, "quit")
+            if len(password) < 8:
+                print("Password must be at least 8 characters.")
+                continue
+            if (regex.search(password) == None):
+                print("Password must include special characters.")
+                continue
+            invalid = False
+        
+        invalidKey = True
+        while invalidKey:
+            key_length = input("Key length: ")
+            if key_length == "quit":
+                console.quit_pretext(self)
+                console.onecmd(self, "quit")
+            else:
+                try:
+                    key_length = int(key_length)
+                except:
+                    print("Key length must be an integer and cannot be blank.")
+                    continue
+                else:
+                    invalidKey = False
 
         hash = ""
 
@@ -101,7 +124,7 @@ class console(cmd.Cmd):
 
         for i in range(0, len(encrypted)):
             keys = ""
-            for i2 in range(0, key_length):
+            for _ in range(0, key_length):
                 try:
                     key = rndm[key_position]
                 except:
@@ -123,9 +146,6 @@ class console(cmd.Cmd):
 
         os.system('echo ' + message + '| minimodem --tx 100 -f /root/test.wav')
         console().cmdloop()
-
-
-
 
     def do_read(self, arg):
         """Read a message."""
@@ -157,7 +177,6 @@ class console(cmd.Cmd):
             print("Invalid input. Must be integer. \n")
             console().cmdloop()
 
-
         rndm = str(random.getrandbits(50000))
         key_list = []
         num = 1
@@ -172,13 +191,11 @@ class console(cmd.Cmd):
             key_list.append(str(num2))
         rndm = "".join(key_list)
 
-
         os.system('minimodem --rx 100 -f "/root/test.wav" > test.txt')
 
         message = open("test.txt","r")
         message = message.read()
         print(message)
-
 
         myList = list(character_list)
         random.seed(char_seed)
@@ -193,17 +210,13 @@ class console(cmd.Cmd):
         for i in range(0, int(len(str(message)) / key_length)):
             keys = ""
             ph = message[key_start:key_end]
-            for i2 in range(0, key_length):
+            for _ in range(0, key_length):
                 key = rndm[key_start]
                 keys = keys + key
                 key_start += 1
 
             msg_out_lst.append(char_list[int(ph) - 100 - int(keys)])
-
-
-
             message2 = message2 + ph
-
             key_end += key_length
 
         # print("Message: " + message2)
@@ -221,14 +234,31 @@ class console(cmd.Cmd):
         print(encryptedString)
         encrypted = base64.decodebytes(encryptedString)  # <- get the bytes back
         salt = encrypted[0:SALT_SIZE]
-        derived = hashlib.pbkdf2_hmac('sha256', password, salt, 100000,
-                                      dklen=IV_SIZE + KEY_SIZE)
+        derived = hashlib.pbkdf2_hmac('sha256',
+                                        password,
+                                        salt,
+                                        100000,
+                                        dklen=IV_SIZE + KEY_SIZE
+        )
         iv = derived[0:IV_SIZE]
         key = derived[IV_SIZE:]
         cleartext = AES.new(key, AES.MODE_CFB, iv).decrypt(encrypted[SALT_SIZE:])
         print()
         print(cleartext)
         print()
+    
+    def quit_pretext(self):
+        print("Quit is a special keyword and can't be a password.")
+        print("Hope you really meant to quit, trollolol...")
 
+    def do_quit(self, arg):
+        '''Quit the program.'''
+        print("Farewell Romeo!", chr(0x2764))
+        sys.exit()
 
-console().cmdloop()
+##
+# Start the program
+##
+
+if __name__ == '__main__':
+    console().cmdloop()
