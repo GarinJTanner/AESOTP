@@ -5,6 +5,8 @@ import ast, base64, cmd, hashlib, os, random, re, stripe
 from Crypto.Cipher import AES
 from datetime import datetime
 
+# If running in repl.it, install pycrypto module
+
 character_list = ""
 for i in range(32, 0x110000):
     izard = chr(i)
@@ -25,7 +27,7 @@ class console(cmd.Cmd):
         '''Send a message.'''
         msg_in = input("Message: ")
         password = input("Password: ")
-        if len(password) <= 8:
+        if len(password) < 8:
             print("Password must be at least 8 characters.")
             console().cmdloop()
 
