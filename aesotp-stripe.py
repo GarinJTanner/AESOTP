@@ -123,7 +123,7 @@ class console(cmd.Cmd):
               try:
                 key = rndm[key_position]
               except:
-                print("Key length too excessive. With longer messages, key the key length around 20 at most.")
+                print("Key length too excessive. With longer messages, keep the key length around 20 at most.")
                 console().cmdloop()
               keys = keys + key
               key_position += 1
