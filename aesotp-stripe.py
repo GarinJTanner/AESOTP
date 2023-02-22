@@ -10,7 +10,7 @@ from Crypto.Cipher import AES
 from datetime import datetime
 
 ##
-# Define character list and special characters
+# Defines character list and special characters
 ##
 
 character_list = ""
