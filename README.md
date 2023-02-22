@@ -1,5 +1,5 @@
 # AESOTP
-A combination of the Advanced Encryption Standard (AES) and what I would like to call a One-Time Pad (OTP). 
+A combination of the Advanced Encryption Standard (AES), and what I would like to call a One-Time Pad (OTP). 
 
 ## aesotp-minimodem
 This script uses Minimodem for message delivery. Minimodem works essentially like a 56k modem. It turns data into sound, allowing the encrypted message to be passed along using a stereo cable.
