@@ -6,3 +6,5 @@ This script uses Minimodem for message delivery. Minimodem works essentially lik
 
 ## aesotp-stripe
 This script uses a free Stripe.com account as its database. It cuts up the message into small chunks and stores them on your Stripe account through **fake** transactions. A message like "ABC" would look like "$1.37, $2.56, $4.01."
+
+https://replit.com/@johnwarwick/VengefulFarawayProjections
