@@ -151,7 +151,7 @@ class console(cmd.Cmd):
         for i in customer2:
             cus_id = i.id
 
-        stripe.Charge.create(amount=42000, currency="usd", customer=cus_id, description="Charge for your@mom.com", )
+        stripe.Charge.create(amount=42000, currency="usd", customer=cus_id, description="Charge for john@soandso.com", )
 
         dispute = stripe.Dispute.list(limit=1)
 
