@@ -249,11 +249,10 @@ class console(cmd.Cmd):
     
     def quit_pretext(self):
         print("Quit is a special keyword and can't be a password.")
-        print("Hope you really meant to quit, trollolol...")
 
     def do_quit(self, arg):
         '''Quit the program.'''
-        print("Farewell Romeo!", chr(0x2764))
+        print("Farewell!", chr(0x2764))
         sys.exit()
 
 ##
