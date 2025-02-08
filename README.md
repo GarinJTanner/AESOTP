@@ -9,6 +9,8 @@ B = 2
 
 C = 3
 
+...
+
 Z = 26
 
 The message "A B C" could be encrypted with a key. If the key was "1 2 3", the encrypted message would then become, "2 4 6". 
