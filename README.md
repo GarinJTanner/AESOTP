@@ -3,7 +3,10 @@ A combination of the Advanced Encryption Standard (AES), and what will be referr
 
 A One-Time Pad is an antiquitated encryption that essentially converts a letter to a numerical value. 
 
-A = 1, B = 2, C = 3, all the way to Z = 26. 
+A = 1
+B = 2
+C = 3
+Z = 26
 
 If you were to include every available character in the UTF-8 format, which includes characters that are not used by an Englishman, this includes every possible langugage known to man, you now displace the character set by a greater factor. Instead of having a series of 26, we now have a series of 144,516. 
 
