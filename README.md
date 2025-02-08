@@ -1,7 +1,7 @@
 # AESOTP
 A combination of the Advanced Encryption Standard (AES), and what will be referred to as an advanced One-Time Pad (OTP). 
 
-A One-Time Pad is an antiquitated encryption that essentially converts a letter to a numerical value. 
+A One-Time Pad is an antiquitated encryption that essentially converts a letter to a numerical value. A key is used to both encrypt and decrypt the value. As long as the sender and receiver only used the pad once, the encryption is safe. For instance:
 
 A = 1
 
@@ -11,7 +11,7 @@ C = 3
 
 Z = 26
 
-The message "ABC" could be encrypted with a key. Say, the message was "ABC" and also the key was "123". The encrypted message would then become, "246".
+The message "A B C" could be encrypted with a key. If the key was "1 2 3", the encrypted message would then become, "2 4 6". 
 
 If you were to include every available character in the UTF-8 format, which includes characters that are not used by an Englishman, this includes every possible langugage known to man, you now displace the character set by a greater factor. Instead of having a series of 26, we now have a series of 144,516. 
 
