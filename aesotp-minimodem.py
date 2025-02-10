@@ -128,7 +128,7 @@ class console(cmd.Cmd):
                 try:
                     key = rndm[key_position]
                 except:
-                    print("Either the message or the password is too long. Shorten the message or password and try again.")
+                    print("The message or password is password is too long. Shorten the message or password and try again.")
                     console().cmdloop()
                 keys = keys + key
                 key_position += 1
