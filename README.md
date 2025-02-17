@@ -15,9 +15,9 @@ Z = 26
 
 The message "A B C" could be encrypted with a key. If the key was "1 2 3", the encrypted message would then become, "2 4 6". 
 
-If you were to include every available character in the UTF-8 format, which includes characters that are not used by an Englishman, this includes every possible langugage known to man, you now displace the character set by a greater factor. Instead of having a series of 26, we now have a series of 144,516. 
+If you were to include every available character in the UTF-8 format, which includes characters that are not used by an Englishman, this would generate every possible langugage known to man. You now displace the character set by a greater factor. Instead of having a series of 26, we now have a series of 144,516. 
 
-After that being said, this encryption is now thrice fold afterward: We use AES, then we use the proprietary OTP, then we use a method to transmit the code which also encrypts it a third time. It is arguable that if this encryption remains air-gapped, it is quantum secure.
+This encryption is now thrice fold afterward: We use AES, then we use the proprietary OTP, then we use a method to transmit the code which also encrypts it a third time. It is arguable that if this encryption remains air-gapped, it is quantum secure.
 
 ## aesotp-minimodem
 This script uses Minimodem for message delivery. Minimodem works essentially like a 56k modem. It turns data into sound, allowing the encrypted message to be passed along using a stereo cable.
